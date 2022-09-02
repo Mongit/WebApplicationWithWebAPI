@@ -7,5 +7,15 @@
 </head>
 <body>
     Test
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $.getJSON("api/Contact", function (result) {
+                console.info(result);
+            });
+        });
+
+    </script>
 </body>
 </html>
