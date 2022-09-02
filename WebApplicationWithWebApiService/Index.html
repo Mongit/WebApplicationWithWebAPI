@@ -9,7 +9,7 @@
     <input type="text" id="searchID" />
     <button onclick="searchContact()">Search</button>
     <button onclick="addContact()">Add</button>
-    <button onclick="updateContact()">Update</button>
+    <button onclick="putContact()">Put</button>
     <button onclick="deleteContact()">Delete</button>
 
     <script type="text/javascript">
@@ -49,18 +49,16 @@
             });
         };
 
-        function updateContact() {
-            var updatedContact = {
-                "id": 0,
-                "firstName": "Natalia",
-                "lastName": "Romanova"
+        function putContact() {
+            var changedContact = {
+                "firstName": "Spiderman"
             };
 
             $.ajax({
                 type: "PUT",
                 dataType: "json",
-                url: "api/Contact/" + $("#searchID").val(),
-                data: updatedContact,
+                url: "api/Contact/1",
+                data: changedContact,
                 success: function (result) {
                     console.info(result);
                 }
@@ -72,7 +70,7 @@
             $.ajax({
                 type: "DELETE",
                 dataType: "json",
-                url: "api/Contact/" + $("#searchID").val(),
+                url: "api/Contact/1",
                 success: function (result) {
                     console.info(result);
                 }

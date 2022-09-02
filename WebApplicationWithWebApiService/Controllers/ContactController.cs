@@ -47,37 +47,25 @@ namespace WebApplicationWithWebApiService.Controllers
         }
 
         // PUT: api/Contact/5
-        public IHttpActionResult Put(int id, [FromBody]Contact value)
+        public IEnumerable<Contact> Put(int id, [FromBody]Contact changedContact)
         {
             Contact contactInDb = contacts.FirstOrDefault(c => c.Id == id);
             int index = Array.IndexOf(contacts, contactInDb);
 
-            if (contactInDb == null)
+            if (contactInDb != null)
             {
-                return NotFound();
+                contactInDb.FirstName = changedContact.FirstName;
+                contactInDb.LastName = changedContact.LastName;
             }
 
-            contactInDb.FirstName = value.FirstName;
-            contactInDb.LastName = value.LastName;
-
-            contacts[index] = contactInDb;
-
-            return Ok(contacts);
+            return contacts;
         }
 
         // DELETE: api/Contact/5
-        public IHttpActionResult Delete(int id)
+        public IEnumerable<Contact> Delete(int id)
         {
-            Contact contactInDb = contacts.FirstOrDefault(c => c.Id == id);
-
-            if (contactInDb == null)
-            {
-                return NotFound();
-            }
-
-            contacts = contacts.Where(i => i.Id != id).ToArray();
-
-            return Ok(contacts);
+            contacts = contacts.Where<Contact>(i => i.Id != id).ToArray<Contact>();
+            return contacts;
         }
     }
 }
