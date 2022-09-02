@@ -8,6 +8,7 @@
 <body>
     <input type="text" id="searchID" />
     <button onclick="searchContact()">Search</button>
+    <button onclick="addContact()">Add</button>
 
     <script type="text/javascript">
 
@@ -22,6 +23,24 @@
                 type: "GET",
                 dataType: "json",
                 url: "api/Contact/" + $("#searchID").val(),
+                success: function (result) {
+                    console.info(result);
+                }
+            });
+        };
+
+        function addContact() {
+            var newContact = {
+                "id": 0,
+                "firstName": "Tony",
+                "lastName": "Stark"
+            };
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "api/Contact",
+                data: newContact,
                 success: function (result) {
                     console.info(result);
                 }

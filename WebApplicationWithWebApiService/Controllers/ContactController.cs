@@ -11,7 +11,7 @@ namespace WebApplicationWithWebApiService.Controllers
         {
             new Contact { Id = 1, FirstName = "Peter", LastName = "Parker" },
             new Contact { Id = 2, FirstName = "Bruce", LastName = "Wayne" },
-            new Contact { Id = 3, FirstName = "Bruce", LastName = "Banne" },
+            new Contact { Id = 3, FirstName = "Bruce", LastName = "Banner" },
         };
 
         // GET: api/Contact
@@ -34,8 +34,14 @@ namespace WebApplicationWithWebApiService.Controllers
         }
 
         // POST: api/Contact
-        public void Post([FromBody]string value)
+        public IEnumerable<Contact> Post([FromBody]Contact newContact)
         {
+            List<Contact> contactList = contacts.ToList<Contact>();
+            newContact.Id = contactList.Count() + 1;
+            contactList.Add(newContact);
+            contacts = contactList.ToArray();
+
+            return contacts;
         }
 
         // PUT: api/Contact/5
