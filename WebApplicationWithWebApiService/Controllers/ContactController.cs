@@ -35,6 +35,13 @@ namespace WebApplicationWithWebApiService.Controllers
             return Ok(contact);
         }
 
+        //GET: api/Contact?name={name}
+        public IEnumerable<Contact> GetContactByName(string name)
+        {
+            Contact[] contactArray = contacts.Where<Contact>(c => c.FirstName.Contains(name)).ToArray<Contact>();
+            return contactArray;
+        }
+
         // POST: api/Contact
         public IEnumerable<Contact> Post([FromBody]Contact newContact)
         {
