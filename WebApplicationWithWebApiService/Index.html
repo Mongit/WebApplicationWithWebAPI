@@ -6,7 +6,8 @@
     <title></title>
 </head>
 <body>
-    Test
+    <input type="text" id="searchID" />
+    <button onclick="searchContact()">Search</button>
 
     <script type="text/javascript">
 
@@ -15,6 +16,17 @@
                 console.info(result);
             });
         });
+
+        function searchContact() {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "api/Contact/" + $("#searchID").val(),
+                success: function (result) {
+                    console.info(result);
+                }
+            });
+        };
 
     </script>
 </body>
