@@ -9,6 +9,8 @@
     <input type="text" id="searchID" />
     <button onclick="searchContact()">Search</button>
     <button onclick="addContact()">Add</button>
+    <button onclick="updateContact()">Update</button>
+    <button onclick="deleteContact()">Delete</button>
 
     <script type="text/javascript">
 
@@ -41,6 +43,36 @@
                 dataType: "json",
                 url: "api/Contact",
                 data: newContact,
+                success: function (result) {
+                    console.info(result);
+                }
+            });
+        };
+
+        function updateContact() {
+            var updatedContact = {
+                "id": 0,
+                "firstName": "Natalia",
+                "lastName": "Romanova"
+            };
+
+            $.ajax({
+                type: "PUT",
+                dataType: "json",
+                url: "api/Contact/" + $("#searchID").val(),
+                data: updatedContact,
+                success: function (result) {
+                    console.info(result);
+                }
+            });
+        };
+
+        function deleteContact() {
+
+            $.ajax({
+                type: "DELETE",
+                dataType: "json",
+                url: "api/Contact/" + $("#searchID").val(),
                 success: function (result) {
                     console.info(result);
                 }

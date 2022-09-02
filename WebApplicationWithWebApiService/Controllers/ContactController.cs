@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using WebApplicationWithWebApiService.Models;
@@ -45,13 +47,37 @@ namespace WebApplicationWithWebApiService.Controllers
         }
 
         // PUT: api/Contact/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put(int id, [FromBody]Contact value)
         {
+            Contact contactInDb = contacts.FirstOrDefault(c => c.Id == id);
+            int index = Array.IndexOf(contacts, contactInDb);
+
+            if (contactInDb == null)
+            {
+                return NotFound();
+            }
+
+            contactInDb.FirstName = value.FirstName;
+            contactInDb.LastName = value.LastName;
+
+            contacts[index] = contactInDb;
+
+            return Ok(contacts);
         }
 
         // DELETE: api/Contact/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            Contact contactInDb = contacts.FirstOrDefault(c => c.Id == id);
+
+            if (contactInDb == null)
+            {
+                return NotFound();
+            }
+
+            contacts = contacts.Where(i => i.Id != id).ToArray();
+
+            return Ok(contacts);
         }
     }
 }
