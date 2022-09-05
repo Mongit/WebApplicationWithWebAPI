@@ -7,6 +7,7 @@ using WebApplicationWithWebApiService.Models;
 
 namespace WebApplicationWithWebApiService.Controllers
 {
+    [RoutePrefix ("api/Contact")]
     public class ContactController : ApiController
     {
         Contact[] contacts = new Contact[]
@@ -17,14 +18,15 @@ namespace WebApplicationWithWebApiService.Controllers
         };
 
         // GET: api/Contact
-        [Route("api/Contact")]
+        [Route("")]
         public IEnumerable<Contact> Get()
         {
             return contacts;
         }
 
         // GET: api/Contact/5
-        [Route("api/Contact/{id:int}")]
+        //[Route("api/Contact/{id:int:min(1)}")] //Route with contraints
+        [Route("{id:int:min(1)}")]
         public IHttpActionResult Get(int id)
         {
             Contact contact = contacts.FirstOrDefault<Contact>(c => c.Id == id);
@@ -38,7 +40,7 @@ namespace WebApplicationWithWebApiService.Controllers
         }
 
         //GET: api/Contact?name={name}
-        [Route("api/Contact/{name}")]
+        [Route("{name}")]
         [HttpGet]
         public IEnumerable<Contact> FindContactByName(string name) //If the method name starts different from Get, specify HttpGet
         {
@@ -47,6 +49,7 @@ namespace WebApplicationWithWebApiService.Controllers
         }
 
         // POST: api/Contact
+        [Route("")]
         public IEnumerable<Contact> Post([FromBody]Contact newContact)
         {
             List<Contact> contactList = contacts.ToList<Contact>();
@@ -58,6 +61,7 @@ namespace WebApplicationWithWebApiService.Controllers
         }
 
         // PUT: api/Contact/5
+        [Route("{id:int}")]
         public IEnumerable<Contact> Put(int id, [FromBody]Contact changedContact)
         {
             Contact contactInDb = contacts.FirstOrDefault(c => c.Id == id);
@@ -73,6 +77,7 @@ namespace WebApplicationWithWebApiService.Controllers
         }
 
         // DELETE: api/Contact/5
+        [Route("{id:int}")]
         public IEnumerable<Contact> Delete(int id)
         {
             contacts = contacts.Where<Contact>(i => i.Id != id).ToArray<Contact>();
