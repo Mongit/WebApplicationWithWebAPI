@@ -15,7 +15,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            $.getJSON("api/Contact", function (result) {
+            $.getJSON("api/ContactsEF", function (result) {
                 console.info(result);
             });
         });
@@ -41,7 +41,7 @@
             $.ajax({
                 type: "POST",
                 dataType: "json",
-                url: "api/Contact",
+                url: "api/ContactsEF",
                 data: newContact,
                 success: function (result) {
                     console.info(result);
