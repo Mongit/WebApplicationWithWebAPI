@@ -24,7 +24,7 @@
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: "api/Contact?name=" + $("#searchID").val(),
+                url: "api/Contact/" + $("#searchID").val(),
                 success: function (result) {
                     console.info(result);
                 }

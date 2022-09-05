@@ -8,6 +8,8 @@ namespace WebApplicationWithWebApiService
     {
         protected void Application_Start(object sender, EventArgs e)
         {
+            // Together with WebAPiConfig 
+            // This enables attribute routing
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }

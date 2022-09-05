@@ -9,13 +9,16 @@ namespace WebApplicationWithWebApiService.App_Start
             // Web API configuration and services
 
             // Web API routes
+            // Enable attribute routing for controllers
+            //  use can combined with routing tables
             config.MapHttpAttributeRoutes();
 
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+            // Routing tables
+            //config.Routes.MapHttpRoute(
+            //    name: "DefaultApi",
+            //    routeTemplate: "api/{controller}/{id}",
+            //    defaults: new { id = RouteParameter.Optional }
+            //);
         }
     }
 }
